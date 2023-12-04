@@ -327,7 +327,7 @@ impl TestCases {
     /// Will add a custom suffix to stderr files.
     ///
     /// This can be useful to test both nightly and stable outputs.
-    /// ```
+    /// ```no_run
     /// # use trybuild2::TestCases;
     /// #[rustversion::nightly]
     /// fn nightly() {
