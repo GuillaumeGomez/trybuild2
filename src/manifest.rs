@@ -36,7 +36,7 @@ pub struct Package {
     pub publish: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Default)]
 pub enum Edition {
     #[serde(rename = "2015")]
     E2015,
@@ -45,6 +45,7 @@ pub enum Edition {
     #[serde(rename = "2021")]
     E2021,
     #[serde(rename = "2024")]
+    #[default]
     E2024,
 }
 
@@ -71,12 +72,6 @@ pub struct Build {
 pub struct Workspace {
     #[serde(skip_serializing_if = "Map::is_empty")]
     pub dependencies: Map<String, Dependency>,
-}
-
-impl Default for Edition {
-    fn default() -> Self {
-        Edition::E2018
-    }
 }
 
 impl AsRef<OsStr> for Name {

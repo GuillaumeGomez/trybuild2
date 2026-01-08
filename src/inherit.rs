@@ -5,6 +5,7 @@ use std::fmt;
 #[derive(Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct InheritEdition {
+    #[allow(dead_code)]
     pub workspace: True,
 }
 
@@ -19,7 +20,7 @@ impl<'de> Deserialize<'de> for True {
     }
 }
 
-impl<'de> Visitor<'de> for True {
+impl Visitor<'_> for True {
     type Value = True;
 
     fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
