@@ -197,9 +197,7 @@ fn target() -> Vec<&'static str> {
     // handle this well.
     //
     // Therefore, expose a cfg to always treat the target as host.
-    if cfg!(trybuild_no_target) {
-        vec![]
-    } else if let Some(target) = TARGET {
+    if let Some(target) = TARGET {
         vec!["--target", target]
     } else {
         vec![]

@@ -33,30 +33,30 @@ impl Display for Error {
         use self::Error::*;
 
         match self {
-            Cargo(e) => write!(f, "failed to execute cargo: {}", e),
+            Cargo(e) => write!(f, "failed to execute cargo: {e}"),
             CargoFail => write!(f, "cargo reported an error"),
-            GetManifest(path, e) => write!(f, "failed to read manifest {}: {}", path.display(), e),
-            Glob(e) => write!(f, "{}", e),
-            Io(e) => write!(f, "{}", e),
-            Metadata(e) => write!(f, "failed to read cargo metadata: {}", e),
+            GetManifest(path, e) => write!(f, "failed to read manifest {}: {e}", path.display()),
+            Glob(e) => write!(f, "{e}"),
+            Io(e) => write!(f, "{e}"),
+            Metadata(e) => write!(f, "failed to read cargo metadata: {e}"),
             Mismatch => write!(f, "compiler error does not match expected error"),
             NoWorkspaceManifest => write!(f, "Cargo.toml uses edition.workspace=true, but no edition found in workspace's manifest"),
-            Open(path, e) => write!(f, "{}: {}", path.display(), e),
-            Pattern(e) => write!(f, "{}", e),
+            Open(path, e) => write!(f, "{}: {e}", path.display()),
+            Pattern(e) => write!(f, "{e}"),
             ProjectDir => write!(f, "failed to determine name of project dir"),
-            ReadStderr(e) => write!(f, "failed to read stderr file: {}", e),
+            ReadStderr(e) => write!(f, "failed to read stderr file: {e}"),
             RunFailed => write!(f, "execution of the test case was unsuccessful"),
             ShouldNotHaveCompiled => {
                 write!(f, "expected test case to fail to compile, but it succeeded")
             }
-            Toml(e) => write!(f, "{}", e),
+            Toml(e) => write!(f, "{e}"),
             UpdateVar(var) => write!(
                 f,
                 "unrecognized value of TRYBUILD2: {:?}",
                 var.to_string_lossy(),
             ),
-            WriteStderr(e) => write!(f, "failed to write stderr file: {}", e),
-            FileCreation(e) => write!(f, "failed to create file for inline test: {}", e),
+            WriteStderr(e) => write!(f, "failed to write stderr file: {e}"),
+            FileCreation(e) => write!(f, "failed to create file for inline test: {e}"),
         }
     }
 }

@@ -20,7 +20,7 @@ pub(crate) fn expand_globs(tests: &[Test]) -> Vec<ExpandedTest> {
             Some(utf8) if utf8.contains('*') => match glob(utf8) {
                 Ok(paths) => {
                     if matches!(test.inner, TestKind::Inline(_)) {
-                        panic!("'*' isn't allowed in inline test names: `{}`", utf8);
+                        panic!("'*' isn't allowed in inline test names: `{utf8}`");
                     }
                     for path in paths {
                         set.insert(
@@ -66,7 +66,7 @@ impl ExpandedTestSet {
         }
 
         let index = self.vec.len();
-        let name = Name(format!("trybuild{:03}", index));
+        let name = Name(format!("trybuild{index:03}"));
         self.path_to_index.insert(test.path.clone(), index);
         self.vec.push(ExpandedTest {
             name,

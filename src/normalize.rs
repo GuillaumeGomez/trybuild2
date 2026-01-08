@@ -152,7 +152,7 @@ struct Filter<'a> {
     hide_numbers: usize,
 }
 
-impl<'a> Filter<'a> {
+impl Filter<'_> {
     fn apply(&mut self, index: usize) -> Option<String> {
         let mut line = self.all_lines[index].to_owned();
 
@@ -202,7 +202,7 @@ impl<'a> Filter<'a> {
                     let component = &line[offset..offset + slash];
                     if component == "out" {
                         if let Some(out_dir_crate_name) = out_dir_crate_name {
-                            let replacement = format!("$OUT_DIR[{}]", out_dir_crate_name);
+                            let replacement = format!("$OUT_DIR[{out_dir_crate_name}]");
                             line.replace_range(indent + 4..offset + 3, &replacement);
                             other_crate = true;
                             break;
@@ -510,9 +510,8 @@ fn unindent(diag: String, normalization: Normalization) -> String {
         }
 
         let mut ahead = lines.clone();
-        let next_line = match ahead.next() {
-            Some(line) => line,
-            None => continue,
+        let Some(next_line) = ahead.next() else {
+            continue
         };
 
         if let IndentedLineKind::Code(indent) = indented_line_kind(next_line, normalization) {

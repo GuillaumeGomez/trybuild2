@@ -73,7 +73,7 @@ mod r#impl {
             None
         }
 
-        pub fn iter(&self, _input: &str) -> Box<dyn Iterator<Item = Render>> {
+        pub fn iter(&self, _input: &str) -> Box<dyn Iterator<Item = Render<'_>>> {
             let _ = Render::Common;
             let _ = Render::Unique;
             match *self {}
